@@ -1,0 +1,180 @@
+/* Custom styles to apply the fantasy theme */
+body {
+    font-family: 'Lora', serif;
+    background-color: #1a1a2e; /* Deep night blue */
+    color: #e0e0e0; /* Soft white */
+    background-image: radial-gradient(circle at top right, rgba(118, 75, 162, 0.2), transparent 40%),
+                      radial-gradient(circle at bottom left, rgba(45, 156, 219, 0.2), transparent 50%);
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+.fantasy-card {
+    background-color: rgba(23, 23, 43, 0.7); /* Darker translucent card */
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Faint gold border */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+.fantasy-card:hover {
+    border-color: rgba(212, 175, 55, 0.7);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+    color: #e0e0e0;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #d4af37; /* Gold */
+    transition: width 0.3s ease;
+}
+.nav-link:hover, .nav-link.active {
+    color: #d4af37;
+}
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+.fantasy-btn {
+    background: linear-gradient(45deg, #d4af37, #b08d2f);
+    color: #1a1a2e;
+    font-family: 'Cinzel', serif;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+.fantasy-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+.section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5), transparent);
+    margin: 4rem 0;
+}
+
+/* ========================================
+   Quill Editor Theme Customization
+   ======================================== */
+
+/* Style the toolbar */
+.ql-toolbar {
+    background-color: #121222; /* A slightly different dark shade */
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    border-bottom: none !important; /* Remove the bottom border to merge with the container */
+    border-top-left-radius: 0.375rem;  /* 6px */
+    border-top-right-radius: 0.375rem; /* 6px */
+}
+
+/* Style the main editor container */
+.ql-container {
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    border-bottom-left-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+    background-color: rgba(23, 23, 43, 0.7); /* Match the fantasy-card background */
+}
+
+/* Style the actual text area */
+.ql-editor {
+    min-height: 150px; /* This is the key: gives the editor a visible height */
+    color: #e0e0e0; /* Sets the text color to your soft white */
+    font-family: 'Lora', serif; /* Ensures font consistency */
+}
+
+/* --- Change Quill's default icon colors --- */
+.ql-snow .ql-stroke {
+    stroke: #e0e0e0;
+}
+.ql-snow .ql-picker-label {
+    color: #e0e0e0;
+}
+.ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+    fill: #e0e0e0;
+}
+
+/* ========================================
+   Corrected Rich Text & Quill List Styles (v4 - Final)
+   ======================================== */
+
+/* --- Unordered Lists (Simple) --- */
+.rich-text-content ul {
+    list-style-type: disc;
+    padding-left: 2.5em; /* Provide space for bullets */
+}
+.rich-text-content ul li::marker {
+    color: #d4af37; /* Gold bullets */
+}
+.rich-text-content ul .ql-indent-1 { list-style-type: circle; }
+.rich-text-content ul .ql-indent-2 { list-style-type: square; }
+.rich-text-content ul .ql-indent-3 { list-style-type: disc; }
+
+/* --- Ordered Lists (Using Counters for accuracy) --- */
+.rich-text-content ol {
+    /* Create a counter for the top-level list items */
+    counter-reset: top-level-counter;
+    padding-left: 2.5em;
+    margin: 1em 0;
+}
+
+.rich-text-content ol > li {
+    /* Remove default browser styling */
+    list-style-type: none;
+    position: relative;
+    margin-bottom: 0.5em;
+}
+
+/* Style for top-level items (those without any indent class) */
+.rich-text-content ol > li:not([class*="ql-indent-"]) {
+    /* This is the key: Reset the sub-level counter on every top-level item */
+    counter-reset: sub-level-counter;
+}
+.rich-text-content ol > li:not([class*="ql-indent-"])::before {
+    /* Increment and display the top-level counter */
+    counter-increment: top-level-counter;
+    content: counter(top-level-counter) ".";
+    font-weight: bold;
+    color: #e0e0e0;
+    position: absolute;
+    left: -2.5em;
+    width: 2em;
+    text-align: right;
+}
+
+/* Style for the first level of indentation */
+.rich-text-content ol > li.ql-indent-1::before {
+    /* Increment and display the sub-level counter with letters */
+    counter-increment: sub-level-counter;
+    content: counter(sub-level-counter, lower-alpha) ".";
+    color: #e0e0e0;
+    position: absolute;
+    left: -2.5em;
+    width: 2em;
+    text-align: right;
+}
+
+/* Style for the second level of indentation */
+.rich-text-content ol > li.ql-indent-2::before {
+    /* You can continue this pattern for deeper nesting if needed */
+    content: "-"; /* Example for a third level */
+    color: #e0e0e0;
+    position: absolute;
+    left: -2.5em;
+    width: 2em;
+    text-align: center;
+}
+
+/* --- General Padding Adjustments --- */
+.rich-text-content .ql-indent-1 { margin-left: 2.5em; }
+.rich-text-content .ql-indent-2 { margin-left: 5em; }
+.rich-text-content .ql-indent-3 { margin-left: 7.5em; }
+.rich-text-content .ql-indent-4 { margin-left: 10em; }
